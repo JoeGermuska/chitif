@@ -1,0 +1,8 @@
+Setting up:
+
+createuser -S -D -R chitif
+createdb -T template_postgis chitif
+psql -U chitif < data/gis/init_srid.sql
+cd chitif
+python ./manage.py syncdb
+python ./manage.py load_tif_shapes
