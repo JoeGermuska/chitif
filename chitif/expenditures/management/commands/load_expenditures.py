@@ -21,7 +21,7 @@ class Command(BaseCommand):
         display_order = 0
         r = csv.reader(data)
         headers = r.next()
-        for district,area,expire,expend,year,status,amt,balance,ref in r:
+        for expenditure_id,district,area,expire,expend,year,status,amt,balance,ref in r:
             try:
                 if ref:
                     amt = amt.replace(",","")
@@ -35,11 +35,11 @@ class Command(BaseCommand):
                         display_order = 0
                     else:
                         display_order += 1
-                    e = Expenditure(tif=tif,description=expend,year=year,status=status,amount=amt,display_order=display_order,balance=balance)
+                    e = Expenditure(id=expenditure_id,tif=tif,description=expend,year=year,status=status,amount=amt,display_order=display_order,balance=balance)
                     e.save()
             except TIF.DoesNotExist:
                 print "%s does not exist" % ref
 
     def make_date(self,str):
-        return datetime.strptime(str,"%m/%d/%y")
+        return datetime.strptime(str,"%Y-%m-%d")
 

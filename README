@@ -14,6 +14,9 @@ createuser -S -D -R chitif
 createdb -T template_postgis chitif
 psql -U chitif < data/gis/init_srid.sql
 cd chitif
-python ./manage.py syncdb
+python ./manage.py syncdb --noinput
 python ./manage.py load_tif_shapes
-python ./manage.py load_tif_expenditures
+python ./manage.py load_expenditures
+
+Or, in one line, for your convenience:
+createuser -S -D -R chitif; createdb -T template_postgis chitif; psql -U chitif < data/gis/init_srid.sql; cd chitif; python ./manage.py syncdb --noinput; python ./manage.py load_tif_shapes; python ./manage.py load_expenditures
