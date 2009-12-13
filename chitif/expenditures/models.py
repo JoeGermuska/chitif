@@ -9,6 +9,8 @@ class Expenditure(models.Model):
     year = models.IntegerField(null=False)
     status = models.CharField(blank=True, max_length=15)
     amount = models.IntegerField(blank=True, null=True)
+    balance = models.IntegerField(blank=True, null=True,help_text="Balance after line item, as represented in data import. May be redundant to computed values.")
+    display_order = models.IntegerField(blank=True, null=True)
 
     class Meta:
         ordering = []
