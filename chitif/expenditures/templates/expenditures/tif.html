@@ -1,0 +1,9 @@
+{% extends "expenditures/base.html" %}
+{% block main_content %}
+<h1>{{tif.name}}</h1>
+<ul>
+{% for expenditure in expenditures %}
+<li>{{ expenditure.description }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

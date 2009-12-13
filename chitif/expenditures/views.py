@@ -4,7 +4,18 @@ from django.template.loader import render_to_string
 from django.contrib.gis.shortcuts import render_to_kml
 from django.http import HttpResponse
 from django.conf import settings
+from expenditures.models import Expenditure
+from geo.models import TIF
+
 # Create your views here.
 
 def home(request):
-    return render_to_response("expenditures/index.html", {})
+    tifs = TIF.objects.all()
+    return render_to_response("expenditures/index.html", {'tifs': tifs})
+    
+def tif(request, tif_slug):
+    tif = get_object_or_404(TIF,slug=tif_slug)
+    expenditures = Expenditure.objects.filter(tif__slug=tif_slug)
+    context = {'expenditures': expenditures, 'tif': tif}
+    return render_to_response("expenditures/tif.html", context)
+

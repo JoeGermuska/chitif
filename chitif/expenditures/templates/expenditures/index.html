@@ -1,4 +1,9 @@
 {% extends 'expenditures/base.html' %}
 {% block main_content %}
 Hello, world
+<ul>
+{% for tif in tifs %}
+<li><a href="{{ tif.get_absolute_url}}">{{tif.name}}</a></li>
+{% endfor %}
+</ul>
 {% endblock %}

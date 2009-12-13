@@ -15,8 +15,8 @@ class Expenditure(models.Model):
         verbose_name, verbose_name_plural = "", "s"
 
     def __unicode__(self):
-        return u"Expenditure"
+        return u"[%s] %s" % (self.tif.name,self.description)
 
     @models.permalink
     def get_absolute_url(self):
-        return ('Expenditure', [self.id])
+        return ('expenditure', [self.id])

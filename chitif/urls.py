@@ -1,12 +1,16 @@
 from django.conf.urls.defaults import *
-
+from expenditures import views as expenditures_views
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
     # Example:
-    # (r'^tifs/', include('tifs.foo.urls')),
+    url("^tif/(?P<tif_slug>[\w-]+)/",
+        expenditures_views.tif,
+        name="tif"),
+    (r'^expenditures/', include('expenditures.urls')),
+    (r'', expenditures_views.home),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
