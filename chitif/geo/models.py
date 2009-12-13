@@ -20,8 +20,12 @@ class TIF(models.Model):
     use = models.CharField(max_length=50)
     show = models.IntegerField()
     area = models.FloatField()
-    perimiter = models.FloatField()
+    perimeter = models.FloatField()
     geom = models.MultiPolygonField(srid=102671)
+
+    region = models.CharField(blank=True, max_length=80,help_text="Region of city, imported from Chicago Reader Expenditure data")
+    expiration_date = models.DateField(blank=True, null=True, auto_now_add=False,help_text='Date TIF district status expires, imported from Chicago Reader Expenditure data')
+    
     objects = models.GeoManager()
 
     def __unicode__(self): return self.name
@@ -34,6 +38,6 @@ tif_mapping = {
     'show' : 'SHOW',
     'name' : 'NAME_TRIM',
     'area' : 'AREA',
-    'perimiter' : 'LEN',
+    'perimeter' : 'LEN',
     'geom' : 'MULTIPOLYGON',
 }

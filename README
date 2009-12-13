@@ -1,8 +1,19 @@
-Setting up:
+A Django application to explore Chicago TIF data, based off of data gathered
+by the  Chicago Reader (http://www.chicagoreader.com/gyrobase/shadow-budget-tif/Content?oid=1251320&storyPage=3)
 
+Initiated as part of the Great American Hackathon '09 by Open Government Chicago
+http://groups.google.com/group/opengovchicago
+
+
+Setting up:
+This assumes you have a running PostGIS/GeoDjango installation on your 
+system.  If you don't, check out http://geodjango.org/docs/tutorial.html#setting-up
+
+Then, execute these commands:
 createuser -S -D -R chitif
 createdb -T template_postgis chitif
 psql -U chitif < data/gis/init_srid.sql
 cd chitif
 python ./manage.py syncdb
 python ./manage.py load_tif_shapes
+python ./manage.py load_tif_expenditures

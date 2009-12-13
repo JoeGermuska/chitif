@@ -80,4 +80,5 @@ INSTALLED_APPS = (
     'django.contrib.gis',
     
     'geo',
+    'expenditures',
 )
