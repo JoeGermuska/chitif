@@ -6,4 +6,35 @@ Hello, world
 <li><a href="{{ tif.get_absolute_url}}">{{tif.name}}</a></li>
 {% endfor %}
 </ul>
+
+<style type="text/css">
+div#map{height:500px;width:500px;}
+</style>
+
+<div class="map-container">  
+    <div id="map"></div>
+    <div class="map-legend"></div>
+</div>
+<script type="text/javascript">
+
+function init_map() {
+    
+    if (GBrowserIsCompatible()) {
+      gmap = new GMap2(document.getElementById("map"));
+      var ward = new GGeoXml("http://praseos.com/tifs.kml");
+      gmap.setCenter(new GLatLng(0, 0), 1);
+      gmap.addOverlay(ward);
+
+      gmap.setMapType(G_PHYSICAL_MAP);
+      GEvent.addListener(ward, "load", function() {
+          this.gotoDefaultViewport( gmap ); 
+      })
+    }
+
+}
+/* is there a preferred way to add another onload handler? */
+//jQuery().ready(init_map)
+init_map();
+</script>
+
 {% endblock %}

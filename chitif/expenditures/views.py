@@ -12,10 +12,13 @@ from geo.models import TIF
 def home(request):
     tifs = TIF.objects.all()
     return render_to_response("expenditures/index.html", {'tifs': tifs})
+  
+def home_kml(request):
+    tifs = TIF.objects.kml()
+    return render_to_kml("expenditures/placemarks.kml",{'places' : tifs})
     
 def tif(request, tif_slug):
     tif = get_object_or_404(TIF,slug=tif_slug)
     expenditures = Expenditure.objects.filter(tif__slug=tif_slug)
     context = {'expenditures': expenditures, 'tif': tif}
     return render_to_response("expenditures/tif.html", context)
-

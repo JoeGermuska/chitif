@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url("^tif/(?P<tif_slug>[\w-]+)/",
         expenditures_views.tif,
         name="tif"),
+    (r'^tifs.kml', expenditures_views.home_kml),
     (r'^expenditures/', include('expenditures.urls')),
     (r'', expenditures_views.home),
 
