@@ -1,0 +1,20 @@
+{% extends "expenditures/base.kml" %}
+{% block placemarks %}{% for tif in tifs %}
+  <Placemark>
+    <name>{{ tif.name }}</name>
+    <description>
+        <a href="/tif/{{ tif.slug }}">{{ tif.name }}</a><br/>
+        <dl>
+            <dt>ref</dt><dd>{{ tif.ref }}</dd>
+            <dt>ind</dt><dd>{{ tif.ind }}</dd>
+            <dt>use</dt><dd>{{ tif.use }}</dd>
+            <dt>show</dt><dd>{{ tif.show }}</dd>
+            <dt>area</dt><dd>{{ tif.area }}</dd>
+            <dt>perimeter</dt><dd>{{ tif.perimeter }}</dd>
+            <dt>region</dt><dd>{{ tif.region }}</dd>
+            <dt>expiration_date</dt><dd>{{ tif.expiration_date }}</dd>
+        </dl>
+        total cash on hand, spent, other info...
+    </description>
+    {{ tif.kml|safe }}
+  </Placemark>{% endfor %}{% endblock %}

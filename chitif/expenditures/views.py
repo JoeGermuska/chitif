@@ -15,7 +15,7 @@ def home(request):
   
 def home_kml(request):
     tifs = TIF.objects.kml()
-    return render_to_kml("expenditures/placemarks.kml",{'places' : tifs})
+    return render_to_kml("expenditures/tifs.kml",{'tifs' : tifs})
     
 def tif(request, tif_slug):
     tif = get_object_or_404(TIF,slug=tif_slug)
