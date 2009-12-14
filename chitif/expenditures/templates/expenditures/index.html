@@ -8,11 +8,36 @@
 {% endfor %}
 </ul>
 
+find TIFs near your home, enter an address, intersection, etc:
+<form id="searchlocation" action="#" onsubmit="lookup_location(this.location.value); return false;" name="searchlocation">
+	<label for="location">Move map to</label><br/>
+	<input type="text" size="30" name="location" value="Vietnam" />
+	<input type="submit" value="Go!" />
+</form>
+
 <div class="map-container">  
     <div id="map"></div>
     <div class="map-legend"></div>
 </div>
 <script type="text/javascript">
+
+var gmap;
+var geocoder;
+
+function lookup_location(location) {
+	if (geocoder) {
+		geocoder.getLatLng(
+			location,
+      		function(point) {
+        		if (!point) {
+          			alert(location + " not found");
+        		} else {
+          			gmap.setCenter(point,14);
+        		}
+      		}
+    	);
+  	}
+}
 
 function init_map() {
     
@@ -26,6 +51,8 @@ function init_map() {
       GEvent.addListener(ward, "load", function() {
           this.gotoDefaultViewport( gmap ); 
       })
+      
+      geocoder = new GClientGeocoder();
     }
 
 }
