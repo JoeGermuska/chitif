@@ -1,15 +1,12 @@
 {% extends 'expenditures/base.html' %}
 {% block main_content %}
-Hello, world
+<div id="home">
+
 <ul>
 {% for tif in tifs %}
 <li><a href="{{ tif.get_absolute_url}}">{{tif.name}}</a></li>
 {% endfor %}
 </ul>
-
-<style type="text/css">
-div#map{height:500px;width:500px;}
-</style>
 
 <div class="map-container">  
     <div id="map"></div>
@@ -37,4 +34,5 @@ function init_map() {
 init_map();
 </script>
 
+</div>
 {% endblock %}
