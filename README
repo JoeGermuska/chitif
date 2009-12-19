@@ -6,17 +6,41 @@ http://groups.google.com/group/opengovchicago
 
 
 Setting up:
-This assumes you have a running PostGIS/GeoDjango installation on your 
-system.  If you don't, check out http://geodjango.org/docs/tutorial.html#setting-up
+To get started, you should have the following software installed on your machine.  If you need help
+getting this installed, post to the Google Group.
 
-Then, execute these commands:
-createuser -S -D -R chitif
-createdb -T template_postgis chitif
-psql -U chitif < data/gis/init_srid.sql
-cd chitif
-python ./manage.py syncdb --noinput
-python ./manage.py load_tif_shapes
-python ./manage.py load_expenditures
+Python 2.6
+Postgres 8.3 
+PostGIS
+pip 0.6.1 
+virtualenv 1.3.2
+virtualenvwrapper (http://www.doughellmann.com/projects/virtualenvwrapper/)
+fabfile 0.9 (http://docs.fabfile.org/)
 
-Or, in one line, for your convenience:
-createuser -S -D -R chitif; createdb -T template_postgis chitif; psql -U chitif < data/gis/init_srid.sql; cd chitif; python ./manage.py syncdb --noinput; python ./manage.py load_tif_shapes; python ./manage.py load_expenditures
+It also assumes that you have set up PostGIS so that your shell account is a superuser.  Again, if you
+have questions, consult the group.
+
+Here is the recommended way to start.  If you understand this well enough to
+disagree, feel free to do it differently.
+
+% mkvirtualenv chitif
+(chitif)% easy_install pip
+% pip install -r requirements.txt
+% fab init_local
+
+When asked 'are you sure?' enter 'y' or 'yes'  The local database initialization will be run. 
+THIS WILL DELETE ANY EXISTING USER OR DATABASE NAMED 'chitif'.  
+
+To verify, you could launch a Django shell and execute some commands:
+
+% cd chitif
+% ./manage.py shell
+>>> from chitif.geo import models
+>>> models.TIF.objects.count()
+158
+>>> models.TIF.objects.get(ref='T-111').name
+u'105th/Vincennes'
+
+
+
+
